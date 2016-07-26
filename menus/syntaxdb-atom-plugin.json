@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Syntax Search",
+        "command": "syntaxdb-atom-plugin:search"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "syntaxdb-atom-plugin",
+          "submenu": [
+            {
+              "label": "Syntax Search",
+              "command": "syntaxdb-atom-plugin:search"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

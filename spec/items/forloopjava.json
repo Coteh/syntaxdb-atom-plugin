@@ -1,0 +1,18 @@
+[
+    {
+        "id":5,
+        "concept_name":"For Loop",
+        "category_id":3,
+        "position":16,
+        "language_id":1,
+        "concept_search":"For Loop in Java",
+        "concept_permalink":"for-loop",
+        "description":"The for loop is a control structure that executes a block of code a specified number of times.\r\n",
+        "syntax":"for(initialization; booleanExpression; update) {\r\n    //statements\r\n} //end for loop\r\n","notes":"Initialization declares the initial value of the controlling variable. The controlling variable can be defined in-line with the for loop, or defined previously. Typically, the for loop uses an integer variable.\r\n\r\nbooleanExpression is the controlling statement that must be true in order for the 'for' structure to loop and execute. booleanExpression must result in either a true or false output. It is created using comparing operators (==, \u003e, \u003c, \u003e=, \u003c=, !=). There can also be multiple boolean expressions within the parentheses (booleanExpression). The boolean expressions are connected through logical operators (\u0026\u0026, ||, !). \r\n\r\nUpdate is the change in the controlling variable that occurs after each execution of the statements. It performs an arithmetic operation on the controlling variable.",
+        "example":"for(int x = 0; x \u003c10; x++) { \r\n    System.out.println(x); \r\n} //x will continue to increment while it remains less than 10.\r\n",
+        "keywords":"",
+        "related":"",
+        "documentation":"",
+        "language_permalink":"java"
+    }
+]
