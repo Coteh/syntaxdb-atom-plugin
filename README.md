@@ -8,8 +8,8 @@ An atom package that provides a simple interface to search and view the [SyntaxD
 Either clone this repo into your packages directory or download it from the atom packages repository.
 
 # Issues
-- Pressing enter more than one on search will do multiple search requests.
-- Previous tab shortcut registers twice if not pressed quickly.
+- Pressing enter more than one on search will do multiple search requests. #1
+- Previous tab shortcut registers twice if not released immediately. #2
 
 # Future Additions
 - Convert to CoffeeScript
