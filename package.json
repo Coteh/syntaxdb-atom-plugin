@@ -3,8 +3,7 @@
   "main": "./lib/syntaxdb-atom-plugin",
   "version": "0.0.0",
   "description": "An atom plugin for SyntaxDB.",
-  "keywords": [
-  ],
+  "keywords": [],
   "activationCommands": {
     "atom-workspace": "syntaxdb-atom-plugin:search"
   },
@@ -15,7 +14,8 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-      "atom-space-pen-views": "^2.1.1",
-      "request": "^2.60.0"
+    "atom-space-pen-views": "^2.1.1",
+    "open": "0.0.5",
+    "request": "^2.60.0"
   }
 }
