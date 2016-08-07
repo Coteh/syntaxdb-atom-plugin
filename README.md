@@ -12,5 +12,6 @@ Either clone this repo into your packages directory or download it from the atom
 - Previous tab shortcut registers twice if not released immediately. [#2](https://github.com/Coteh/syntaxdb-atom-plugin/issues/2)
 
 # Future Additions
+- Finish spec tests
 - Convert to CoffeeScript
-- Save some common results to cache (via View serialization or some other method)
+- Save common results to cache (via View serialization or some other method)
