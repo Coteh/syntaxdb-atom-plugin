@@ -7,6 +7,18 @@ An atom package that provides a simple interface to search and view the [SyntaxD
 # Installation
 Either clone this repo into your packages directory or download it from the atom packages repository.
 
+![Search View](screenshots/SearchView.png)
+
+# How to Use
+To use the atom package, make sure it's installed, then press Ctrl-Alt-S to activate the SyntaxDB search panel.
+To activate the language filter, which displays all concepts on the SyntaxDB database by language, press Ctrl-Alt-L.
+
+On the search panel, type in a search query (eg. "for loop in Java") and press enter. A list view will then appear, displaying the results
+it has gathered from the SyntaxDB API. Selecting any of these results will bring up a results view for the entry, displaying
+its syntax as well as additional information.
+
+![Results View](screenshots/ResultsView.png)
+
 # Issues
 - Pressing enter more than one on search will do multiple search requests. [#1](https://github.com/Coteh/syntaxdb-atom-plugin/issues/1)
 - Previous tab shortcut registers twice if not released immediately. [#2](https://github.com/Coteh/syntaxdb-atom-plugin/issues/2)
