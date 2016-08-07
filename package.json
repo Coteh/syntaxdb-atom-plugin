@@ -5,7 +5,7 @@
   "description": "An atom plugin for SyntaxDB.",
   "keywords": [],
   "activationCommands": {
-    "atom-workspace": "syntaxdb-atom-plugin:search"
+    "atom-workspace": ["syntaxdb-atom-plugin:search", "syntaxdb-atom-plugin:language-filter"]
   },
   "author": "Coteh",
   "repository": "https://github.com/Coteh/syntaxdb-atom-plugin",
