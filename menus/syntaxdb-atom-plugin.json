@@ -12,11 +12,15 @@
       "label": "Packages",
       "submenu": [
         {
-          "label": "syntaxdb-atom-plugin",
+          "label": "SyntaxDB Atom Plugin",
           "submenu": [
             {
               "label": "Syntax Search",
               "command": "syntaxdb-atom-plugin:search"
+            },
+            {
+              "label": "Language Filter",
+              "command": "syntaxdb-atom-plugin:language-filter"
             }
           ]
         }
