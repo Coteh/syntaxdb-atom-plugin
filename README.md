@@ -1,8 +1,8 @@
 # SyntaxDB Atom Plugin
 
-An atom package that provides a simple interface to search and view the [SyntaxDB](https://syntaxdb.com/) database.
+![Front](screenshots/front.png)
 
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+An atom package that provides a simple interface to search and view the [SyntaxDB](https://syntaxdb.com/) database.
 
 # Installation
 Either clone this repo into your packages directory or download it from the atom packages repository.
