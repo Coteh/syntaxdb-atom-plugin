@@ -30,6 +30,7 @@ is currently selected, then press the "Place in Document" button. (or press shif
 # Issues
 - Pressing enter more than one on search will do multiple search requests. [#1](https://github.com/Coteh/syntaxdb-atom-plugin/issues/1)
 - Previous tab shortcut registers twice if not released immediately. [#2](https://github.com/Coteh/syntaxdb-atom-plugin/issues/2)
+- Example placement does not take tabbing of the document into account. [#5](https://github.com/Coteh/syntaxdb-atom-plugin/issues/5)
 
 # Future Additions
 - Finish spec tests
