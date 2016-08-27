@@ -1,11 +1,14 @@
 {
   "name": "syntaxdb-atom-plugin",
   "main": "./lib/syntaxdb-atom-plugin",
-  "version": "1.0.0",
+  "version": "1.0.0-readme-fix",
   "description": "An atom plugin for SyntaxDB.",
   "keywords": [],
   "activationCommands": {
-    "atom-workspace": ["syntaxdb-atom-plugin:search", "syntaxdb-atom-plugin:language-filter"]
+    "atom-workspace": [
+      "syntaxdb-atom-plugin:search",
+      "syntaxdb-atom-plugin:language-filter"
+    ]
   },
   "author": "Coteh",
   "repository": "https://github.com/Coteh/syntaxdb-atom-plugin",
