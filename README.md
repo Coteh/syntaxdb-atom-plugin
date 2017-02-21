@@ -28,9 +28,8 @@ is currently selected, then press the "Place in Document" button. (or press shif
 *Example of placing an example into a document.*
 
 # Issues
-- Pressing enter more than once on search will do multiple search requests. [#1](https://github.com/Coteh/syntaxdb-atom-plugin/issues/1)
 - Previous tab shortcut registers twice if not released immediately. [#2](https://github.com/Coteh/syntaxdb-atom-plugin/issues/2)
-- Sanitize search text before it's sent out. [#9](https://github.com/Coteh/syntaxdb-atom-plugin/issues/9)
+- [View more issues here](https://github.com/Coteh/syntaxdb-atom-plugin/issues)
 
 # Future Additions
 - Finish spec tests
