@@ -58,5 +58,4 @@ Whenever you make a change to the package, reload Atom window to see the changes
 # Future Additions
 - Finish spec tests
 - Improve package activation time
-- Convert to CoffeeScript
 - Save common results to cache (via View serialization or some other method)
