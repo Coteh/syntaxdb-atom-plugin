@@ -4,6 +4,9 @@
   "version": "1.0.3",
   "description": "An atom plugin for SyntaxDB.",
   "keywords": [],
+  "scripts": {
+    "test": "atom --test --timeout 60 ./spec/*.js"
+  },
   "activationCommands": {
     "atom-workspace": [
       "syntaxdb-atom-plugin:search",
