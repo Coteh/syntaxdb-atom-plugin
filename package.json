@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "atom-space-pen-views": "^2.1.1",
-    "open": "0.0.5",
+    "open": "7.2.1",
     "request": "^2.60.0"
   }
 }
