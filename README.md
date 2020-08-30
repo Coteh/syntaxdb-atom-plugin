@@ -5,7 +5,12 @@
 An atom package that provides a simple interface to search and view the [SyntaxDB](https://syntaxdb.com/) database.
 
 # Installation
-Either clone this repo into your packages directory or download it from the atom packages repository.
+For regular user installation, head over to the [Atom package page](https://atom.io/packages/syntaxdb-atom-plugin) and install it through there, or head over to `Preferences -> Install` in Atom and search for "syntaxdb-atom-plugin".
+
+You can also install it via the command line by entering:
+```
+apm install syntaxdb-atom-plugin
+```
 
 # How to Use
 To use the atom package, make sure it's installed, then press Ctrl-Alt-S to activate the SyntaxDB search panel.
@@ -26,6 +31,25 @@ is currently selected, then press the "Place in Document" button. (or press shif
 
 ![Placing Example into Document](https://raw.githubusercontent.com/Coteh/syntaxdb-atom-plugin/master/screenshots/PlaceExample.gif)  
 *Example of placing an example into a document.*
+
+# Development
+To install the package for development purposes, first clone the repository:
+```
+git clone https://github.com/Coteh/syntaxdb-atom-plugin.git
+```
+
+Navigate to root directory of project and install dependencies:
+```
+npm install
+```
+
+Then link the package:
+```
+apm link
+```
+This will create a symlink in your Atom packages folder to your clone of the repository, effectively installing it.
+
+Whenever you make a change to the package, reload Atom window to see the changes.
 
 # Issues
 - Previous tab shortcut registers twice if not released immediately. [#2](https://github.com/Coteh/syntaxdb-atom-plugin/issues/2)
