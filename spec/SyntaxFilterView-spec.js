@@ -21,16 +21,23 @@ describe('SyntaxFilterView', () => {
 
         runs(() => {
             // Atom packages with "activationCommands" in package.json are lazy loaded
-            activationPromise = atom.packages.activatePackage('syntaxdb-atom-plugin');
+            activationPromise = atom.packages.activatePackage(
+                'syntaxdb-atom-plugin',
+            );
         });
     });
 
-    describe("when filter view is toggled", () => {
-        it("should display a syntaxdb filter view", () => {
+    describe('when filter view is toggled', () => {
+        it('should display a syntaxdb filter view', () => {
             // Expect the SyntaxDB filter panel to not be there yet
-            expect(workspaceElement.querySelector(".syntaxdb-filter")).not.toExist();
+            expect(
+                workspaceElement.querySelector('.syntaxdb-filter'),
+            ).not.toExist();
             // Trigger the SyntaxDB language filter bar
-            atom.commands.dispatch(workspaceElement, 'syntaxdb-atom-plugin:language-filter');
+            atom.commands.dispatch(
+                workspaceElement,
+                'syntaxdb-atom-plugin:language-filter',
+            );
             // Dispatch should now trigger the package. Wait for package to be loaded
             waitsForPromise(() => activationPromise);
 
@@ -38,28 +45,30 @@ describe('SyntaxFilterView', () => {
 
             runs(() => {
                 // Should now be visible
-                expect(workspaceElement.querySelector(".syntaxdb-filter")).toBeVisible();
+                expect(
+                    workspaceElement.querySelector('.syntaxdb-filter'),
+                ).toBeVisible();
             });
         });
 
-        it("should display a list of languages that are covered by SyntaxDB", () => {
+        it('should display a list of languages that are covered by SyntaxDB', () => {
             expect('life').toBe('easy');
         });
     });
 
-    describe("when language is selected in filter view", () => {
+    describe('when language is selected in filter view', () => {
         it('should display categories pertaining to that language', () => {
             expect('life').toBe('easy');
         });
     });
 
-    describe("when category is selected in filter view", () => {
+    describe('when category is selected in filter view', () => {
         it('should display concepts pertaining to that category', () => {
             expect('life').toBe('easy');
         });
     });
 
-    describe("when concept is selected in filter view", () => {
+    describe('when concept is selected in filter view', () => {
         it('should display display the concept', () => {
             expect('life').toBe('easy');
         });

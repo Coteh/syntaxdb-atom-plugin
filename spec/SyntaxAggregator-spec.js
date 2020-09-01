@@ -73,11 +73,15 @@ describe('SyntaxAggregator', () => {
             });
 
             it("shouldn't attempt to open filter view", () => {
-                expect(syntaxAggregator.show).toThrow(new Error("No filter view provided"));
+                expect(syntaxAggregator.show).toThrow(
+                    new Error('No filter view provided'),
+                );
             });
 
             it("shouldn't attempt to hide filter view", () => {
-                expect(syntaxAggregator.hide).toThrow(new Error("No filter view provided"));
+                expect(syntaxAggregator.hide).toThrow(
+                    new Error('No filter view provided'),
+                );
             });
         });
 
