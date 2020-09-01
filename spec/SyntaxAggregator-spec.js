@@ -6,78 +6,63 @@
 import SyntaxAggregator from '../lib/SyntaxAggregator';
 
 describe('SyntaxAggregator', () => {
-    let syntaxAggregator, workspaceElement, activationPromise;
+    let syntaxAggregator;
 
-    beforeEach(() => {
-        workspaceElement = atom.views.getView(atom.workspace);
-
-        // Attaching the workspaceElement to the DOM is required to allow the
-        // `toBeVisible()` matchers to work. Anything testing visibility or focus
-        // requires that the workspaceElement is on the DOM. Tests that attach the
-        // workspaceElement to the DOM are generally slower than those off DOM.
-        jasmine.attachToDOM(workspaceElement);
-
-        waitsForPromise(() => atom.workspace.open());
-
-        runs(() => {
-            // Atom packages with "activationCommands" in package.json are lazy loaded
-            activationPromise = atom.packages.activatePackage('syntaxdb-atom-plugin');
+    describe('when toggled', () => {
+        it('should request languages', () => {
+            throw new Error('Not implemented');
+        });
+        it('should show the filter view if hidden', () => {
+            throw new Error('Not implemented');
+        });
+        it('should hide the filter view if shown', () => {
+            throw new Error('Not implemented');
         });
     });
 
-    describe("when aggregator is toggled", () => {
-        it("should display a syntaxdb filter view", () => {
-            // Expect the SyntaxDB filter panel to not be there yet
-            expect(workspaceElement.querySelector(".syntaxdb-filter")).not.toExist();
-            // Trigger the SyntaxDB language filter bar
-            atom.commands.dispatch(workspaceElement, 'syntaxdb-atom-plugin:language-filter');
-            // Dispatch should now trigger the package. Wait for package to be loaded
-            waitsForPromise(() => activationPromise);
+    describe('when show triggered', () => {
+        it('should show the view', () => {
+            throw new Error('Not implemented');
+        });
+    });
 
-            waits(2000);
+    describe('when hide triggered', () => {
+        it('hides the view', () => {
+            throw new Error('Not implemented');
+        });
+    });
 
-            runs(() => {
-                // Should now be visible
-                expect(workspaceElement.querySelector(".syntaxdb-filter")).toBeVisible();
+    describe('when language item selected', () => {
+        it('should request category', () => {
+            throw new Error('Not implemented');
+        });
+    });
+
+    describe('when category item selected', () => {
+        it('should request concept', () => {
+            throw new Error('Not implemented');
+        });
+    });
+
+    describe('when resource requested', () => {
+        describe('languages', () => {
+            it('send list of languages to the view', () => {
+                throw new Error('Not implemented');
             });
         });
-
-        it("should display a list of languages that are covered by SyntaxDB", () => {
-            // Expect the SyntaxDB filter panel to not be there yet
-            expect(workspaceElement.querySelector(".syntaxdb-filter")).not.toExist();
-            // Trigger the SyntaxDB language filter bar
-            atom.commands.dispatch(workspaceElement, 'syntaxdb-atom-plugin:language-filter');
-            // Dispatch should now trigger the package. Wait for package to be loaded
-            waitsForPromise(() => activationPromise);
-
-            waits(2000);
-
-            runs(() => {
-                // Should now be visible
-                expect(workspaceElement.querySelector(".syntaxdb-filter")).toBeVisible();
+        describe('category', () => {
+            it('send list of categories to the view', () => {
+                throw new Error('Not implemented');
+            });
+        });
+        describe('concepts', () => {
+            it('send list of concepts to the view', () => {
+                throw new Error('Not implemented');
             });
         });
     });
 
-    describe("when language result is selected", () => {
-        it('should display categories pretaining to that language', () => {
-            expect('life').toBe('easy');
-        });
-    });
-
-    describe("when category result is selected", () => {
-        it('should display concepts pretaining to that category', () => {
-            expect('life').toBe('easy');
-        });
-    });
-
-    describe("when concept result is selected", () => {
-        it('should display concept info in results view', () => {
-            expect('life').toBe('easy');
-        });
-    });
-
-    describe("when appropriate views aren't provided", () => {
+    describe("when views aren't provided", () => {
         beforeEach(() => {
             syntaxAggregator = new SyntaxAggregator();
         });
