@@ -20,43 +20,54 @@ describe('SyntaxAggregator', () => {
         });
     });
 
-    describe('when show triggered', () => {
+    describe('when shown', () => {
         it('should show the view', () => {
             throw new Error('Not implemented');
         });
     });
 
-    describe('when hide triggered', () => {
+    describe('when hidden', () => {
         it('hides the view', () => {
             throw new Error('Not implemented');
         });
     });
 
     describe('when language item selected', () => {
-        it('should request category', () => {
+        it('should request categories', () => {
             throw new Error('Not implemented');
         });
     });
 
     describe('when category item selected', () => {
+        it('should request concepts', () => {
+            throw new Error('Not implemented');
+        });
+    });
+
+    describe('when concept item selected', () => {
         it('should request concept', () => {
             throw new Error('Not implemented');
         });
     });
 
     describe('when resource requested', () => {
-        describe('languages', () => {
-            it('send list of languages to the view', () => {
+        describe('list of languages', () => {
+            it('should send list of languages to the view', () => {
                 throw new Error('Not implemented');
             });
         });
-        describe('category', () => {
-            it('send list of categories to the view', () => {
+        describe('list of category', () => {
+            it('should send list of categories to the view', () => {
                 throw new Error('Not implemented');
             });
         });
-        describe('concepts', () => {
-            it('send list of concepts to the view', () => {
+        describe('list of concepts', () => {
+            it('should send list of concepts to the view', () => {
+                throw new Error('Not implemented');
+            });
+        });
+        describe('concept', () => {
+            it('should send concept to view', () => {
                 throw new Error('Not implemented');
             });
         });

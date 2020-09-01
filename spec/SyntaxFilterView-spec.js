@@ -69,8 +69,35 @@ describe('SyntaxFilterView', () => {
     });
 
     describe('when concept is selected in filter view', () => {
-        it('should display display the concept', () => {
+        it('should display the concept', () => {
             expect('life').toBe('easy');
+        });
+    });
+
+    describe('when filter view has no items', () => {
+        it('should not show the filter text editor view', () => {
+            // Trigger the SyntaxDB language filter bar
+            atom.commands.dispatch(
+                workspaceElement,
+                'syntaxdb-atom-plugin:language-filter',
+            );
+            // Dispatch should now trigger the package. Wait for package to be loaded
+            waitsForPromise(() => activationPromise);
+
+            waits(2000);
+
+            runs(() => {
+                // Should not be visible
+                expect(
+                    workspaceElement.querySelector(
+                        '.syntaxdb-filter > .editor',
+                    ),
+                ).not.toBeVisible();
+            });
+        });
+
+        it('should display a label stating that there are no items', () => {
+            throw new Error('Not implemented');
         });
     });
 });
