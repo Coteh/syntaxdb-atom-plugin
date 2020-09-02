@@ -12,7 +12,7 @@
             "label": "Packages",
             "submenu": [
                 {
-                    "label": "SyntaxDB Atom Plugin",
+                    "label": "SyntaxDB",
                     "submenu": [
                         {
                             "label": "Syntax Search",
