@@ -1,21 +1,37 @@
 'use babel';
 
-// TODO mock request calls using proxyquire or something similar
-// https://github.com/thlorenz/proxyquire
-
-import SyntaxAggregator from '../lib/SyntaxAggregator';
+const proxyquire = require('proxyquire');
+const sinon = require('sinon');
+// import SyntaxFilterView from '../lib/SyntaxFilterView';
+// import SyntaxResultView from '../lib/SyntaxResultView';
+const getStub = sinon.stub();
+const SyntaxAggregator = proxyquire('../lib/SyntaxAggregator', {
+    request: {
+        get: getStub,
+    },
+}).default;
+const { expect } = require('chai');
 
 describe('SyntaxAggregator', () => {
     let syntaxAggregator;
 
-    describe('when toggled', () => {
+    beforeEach(() => {
+        syntaxAggregator = new SyntaxAggregator();
+    });
+
+    describe('when it goes from untoggled to toggled', () => {
         it('should request languages', () => {
+            syntaxAggregator.setViews({ filterView: {}, resultView: {} });
+            syntaxAggregator.toggle();
+            expect(getStub).to.have.been.calledOnce;
+        });
+        it('should show the filter view', () => {
             throw new Error('Not implemented');
         });
-        it('should show the filter view if hidden', () => {
-            throw new Error('Not implemented');
-        });
-        it('should hide the filter view if shown', () => {
+    });
+
+    describe('when it goes from toggled to untoggled', () => {
+        it('should hide the filter view', () => {
             throw new Error('Not implemented');
         });
     });
@@ -74,13 +90,9 @@ describe('SyntaxAggregator', () => {
     });
 
     describe("when views aren't provided", () => {
-        beforeEach(() => {
-            syntaxAggregator = new SyntaxAggregator();
-        });
-
         describe("when filter view isn't provided", () => {
             beforeEach(() => {
-                expect(syntaxAggregator.filterView).not.toExist();
+                expect(syntaxAggregator.filterView).not.exist;
             });
 
             it("shouldn't attempt to open filter view", () => {
@@ -98,11 +110,11 @@ describe('SyntaxAggregator', () => {
 
         describe("when result view isn't provided", () => {
             it("shouldn't attempt to open search results view", () => {
-                expect('life').toBe('easy');
+                throw new Error('Not implemented');
             });
 
             it("shouldn't attempt to hide search results view", () => {
-                expect('life').toBe('easy');
+                throw new Error('Not implemented');
             });
         });
     });
