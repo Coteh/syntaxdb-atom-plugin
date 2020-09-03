@@ -1,6 +1,6 @@
 'use babel';
 
-import SyntaxFilterView from '../lib/SyntaxFilterView';
+import SyntaxFilterView from '../lib/view/SyntaxFilterView';
 
 describe('SyntaxFilterView', () => {
     describe('when item is selected on filter view', () => {
