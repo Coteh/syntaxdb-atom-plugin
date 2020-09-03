@@ -1,6 +1,6 @@
 {
     "name": "syntaxdb-atom-plugin",
-    "main": "./lib/syntaxdb-atom-plugin",
+    "main": "./lib/main",
     "version": "1.0.3",
     "description": "An atom plugin for SyntaxDB.",
     "keywords": [],

@@ -1,6 +1,6 @@
 'use babel';
 
-import SyntaxAggregator from '../lib/SyntaxAggregator';
+import SyntaxAggregator from '../lib/domain/SyntaxAggregator';
 
 describe('SyntaxAggregator', () => {
     let syntaxAggregator, workspaceElement, activationPromise;

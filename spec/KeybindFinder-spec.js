@@ -1,6 +1,6 @@
 'use babel';
 
-import KeybindFinder from '../lib/KeybindFinder';
+import KeybindFinder from '../lib/editor/KeybindFinder';
 
 describe('KeybindFinder', () => {
     let activationPromise;
