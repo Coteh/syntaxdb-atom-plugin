@@ -5,7 +5,7 @@ const sinon = require('sinon');
 // import SyntaxFilterView from '../lib/SyntaxFilterView';
 // import SyntaxResultView from '../lib/SyntaxResultView';
 const getStub = sinon.stub();
-const SyntaxAggregator = proxyquire('../lib/SyntaxAggregator', {
+const SyntaxAggregator = proxyquire('../lib/domain/SyntaxAggregator', {
     request: {
         get: getStub,
     },

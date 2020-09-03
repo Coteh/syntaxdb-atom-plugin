@@ -1,6 +1,6 @@
 'use babel';
 
-import SyntaxSearch from '../lib/SyntaxSearch';
+import SyntaxSearch from '../lib/domain/SyntaxSearch';
 
 describe('SyntaxSearch', () => {
     let syntaxSearch;

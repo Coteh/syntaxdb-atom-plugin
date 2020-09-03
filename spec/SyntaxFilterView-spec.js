@@ -3,7 +3,7 @@
 // TODO mock request calls using proxyquire or something similar
 // https://github.com/thlorenz/proxyquire
 
-import SyntaxFilterView from '../lib/SyntaxFilterView';
+import SyntaxFilterView from '../lib/view/SyntaxFilterView';
 
 describe('SyntaxFilterView', () => {
     let workspaceElement, activationPromise;
