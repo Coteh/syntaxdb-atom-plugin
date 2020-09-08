@@ -34,7 +34,7 @@ describe('EditorInserter', () => {
         it('should invoke text editor insertion', () => {
             // Stubs
             let stubSelection = sinon.createStubInstance(Selection);
-            stubSelection.getText = sinon.stub().returns(['']);
+            stubSelection.getText = sinon.stub().returns('');
             editorStub.getSelections = sinon.stub().returns([stubSelection]);
 
             // Precondition
@@ -50,7 +50,7 @@ describe('EditorInserter', () => {
             expect(editorStub.getSelections).to.have.returned([stubSelection]);
             expect(stubSelection.insertText).to.have.been.calledTwice;
             expect(stubSelection.getText).to.have.been.calledOnce;
-            expect(stubSelection.getText).to.have.returned(['']);
+            expect(stubSelection.getText).to.have.returned('');
         });
         it('should throw error if text is empty', () => {
             expect(() => editorInserter.insertText('')).to.throw(
@@ -77,7 +77,30 @@ describe('EditorInserter', () => {
             throw new Error('Not implemented');
         });
         it('should prepend the same spacing as the first line to all other lines', () => {
-            throw new Error('Not implemented');
+            // Stubs
+            let stubSelection = sinon.createStubInstance(Selection);
+            stubSelection.getText = sinon.stub().returns('\t\t\t');
+            editorStub.getSelections = sinon.stub().returns([stubSelection]);
+
+            // Precondition
+            expect(editorStub.getSelections).to.not.have.been.called;
+            expect(stubSelection.insertText).to.not.have.been.called;
+            expect(stubSelection.getText).to.not.have.been.called;
+
+            // Action
+            editorInserter.insertText(
+                'for (int i = 0; i < 5; i++) {\n\tcout << i;\n}',
+            );
+
+            // Postconditions
+            expect(stubSelection.insertText).to.have.been.calledTwice;
+            expect(stubSelection.getText).to.have.returned('\t\t\t');
+            expect(stubSelection.insertText).to.have.been.calledWith(
+                'for (int i = 0; i < 5; i++) {',
+            );
+            expect(stubSelection.insertText).to.have.been.calledWith(
+                '\t\t\t\tcout << i;\n\t\t\t}',
+            );
         });
     });
 });
