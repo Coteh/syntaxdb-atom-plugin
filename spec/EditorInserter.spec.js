@@ -48,9 +48,16 @@ describe('EditorInserter', () => {
             // Postconditions
             expect(editorStub.getSelections).to.have.been.calledOnce;
             expect(editorStub.getSelections).to.have.returned([stubSelection]);
-            expect(stubSelection.insertText).to.have.been.calledTwice;
             expect(stubSelection.getText).to.have.been.calledOnce;
             expect(stubSelection.getText).to.have.returned('');
+            expect(stubSelection.insertText).to.have.been.calledTwice;
+            expect(
+                stubSelection.insertText
+                    .getCall(0)
+                    .calledWithExactly('Hello World'),
+            ).to.be.true;
+            expect(stubSelection.insertText.getCall(1).calledWithExactly('')).to
+                .be.true;
         });
         it('should throw error if text is empty', () => {
             expect(() => editorInserter.insertText('')).to.throw(
@@ -74,7 +81,40 @@ describe('EditorInserter', () => {
             );
         });
         it('should insert into multiple selections', () => {
-            throw new Error('Not implemented');
+            // Stubs
+            let stubSelections = new Array(3);
+            for (let i = 0; i < stubSelections.length; i++) {
+                stubSelections[i] = sinon.createStubInstance(Selection);
+                stubSelections[i].getText = sinon.stub().returns('');
+            }
+            editorStub.getSelections = sinon.stub().returns(stubSelections);
+
+            // Precondition
+            expect(editorStub.getSelections).to.not.have.been.called;
+            for (let i = 0; i < stubSelections.length; i++) {
+                expect(stubSelections[i].insertText).to.not.have.been.called;
+                expect(stubSelections[i].getText).to.not.have.been.called;
+            }
+
+            // Action
+            editorInserter.insertText('Hello World');
+
+            // Postconditions
+            expect(editorStub.getSelections).to.have.been.calledOnce;
+            expect(editorStub.getSelections).to.have.returned(stubSelections);
+            for (let i = 0; i < stubSelections.length; i++) {
+                expect(stubSelections[i].insertText).to.have.been.calledTwice;
+                expect(
+                    stubSelections[i].insertText
+                        .getCall(0)
+                        .calledWithExactly('Hello World'),
+                ).to.be.true;
+                expect(
+                    stubSelections[i].insertText
+                        .getCall(1)
+                        .calledWithExactly(''),
+                ).to.be.true;
+            }
         });
         it('should prepend the same spacing as the first line to all other lines', () => {
             // Stubs
