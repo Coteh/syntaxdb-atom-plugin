@@ -6,9 +6,9 @@ import { expect } from 'chai';
 import {
     percentEncode,
     InvalidPercentEncodedStringError,
-} from '../lib/util/PercentEncoder';
+} from '../lib/util/PercentEncode';
 
-describe('PercentEncoder', () => {
+describe('PercentEncode', () => {
     describe('percentEncode', () => {
         it('should percent encode a character', () => {
             expect(percentEncode('Something cool!')).to.equal(
