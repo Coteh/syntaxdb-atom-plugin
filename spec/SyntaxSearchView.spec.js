@@ -42,19 +42,19 @@ describe('SyntaxSearchView', () => {
         });
 
         it('should clear out search text from previous search', () => {
-            expect('life').toBe('easy');
+            throw new Error('Not implemented');
         });
     });
 
     describe('when search results are returned', () => {
         it('should display search results', () => {
-            expect('life').toBe('easy');
+            throw new Error('Not implemented');
         });
     });
 
     describe('when concept result is selected', () => {
         it('should display concept info', () => {
-            expect('life').toBe('easy');
+            throw new Error('Not implemented');
         });
     });
 });

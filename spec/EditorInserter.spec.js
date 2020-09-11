@@ -10,11 +10,11 @@ import { expect } from 'chai';
 
 chai.use(require('sinon-chai'));
 
-class Editor {
+class EditorStub {
     getSelections() {}
 }
 
-class Selection {
+class SelectionStub {
     getText() {}
     selectToBeginningOfLine() {}
     selectRight() {}
@@ -26,14 +26,14 @@ describe('EditorInserter', () => {
     let editorStub;
 
     beforeEach(() => {
-        editorStub = sinon.createStubInstance(Editor);
+        editorStub = sinon.createStubInstance(EditorStub);
         editorInserter = new EditorInserter(editorStub);
     });
 
     describe('when text insertion performed', () => {
         it('should invoke text editor insertion', () => {
             // Stubs
-            let stubSelection = sinon.createStubInstance(Selection);
+            let stubSelection = sinon.createStubInstance(SelectionStub);
             stubSelection.getText = sinon.stub().returns('');
             editorStub.getSelections = sinon.stub().returns([stubSelection]);
 
@@ -84,7 +84,7 @@ describe('EditorInserter', () => {
             // Stubs
             let stubSelections = new Array(3);
             for (let i = 0; i < stubSelections.length; i++) {
-                stubSelections[i] = sinon.createStubInstance(Selection);
+                stubSelections[i] = sinon.createStubInstance(SelectionStub);
                 stubSelections[i].getText = sinon.stub().returns('');
             }
             editorStub.getSelections = sinon.stub().returns(stubSelections);
@@ -118,7 +118,7 @@ describe('EditorInserter', () => {
         });
         it('should prepend the same spacing as the first line to all other lines', () => {
             // Stubs
-            let stubSelection = sinon.createStubInstance(Selection);
+            let stubSelection = sinon.createStubInstance(SelectionStub);
             stubSelection.getText = sinon.stub().returns('\t\t\t');
             editorStub.getSelections = sinon.stub().returns([stubSelection]);
 

@@ -52,25 +52,25 @@ describe('SyntaxFilterView', () => {
         });
 
         it('should display a list of languages that are covered by SyntaxDB', () => {
-            expect('life').toBe('easy');
+            throw new Error('Not implemented');
         });
     });
 
     describe('when language is selected in filter view', () => {
         it('should display categories pertaining to that language', () => {
-            expect('life').toBe('easy');
+            throw new Error('Not implemented');
         });
     });
 
     describe('when category is selected in filter view', () => {
         it('should display concepts pertaining to that category', () => {
-            expect('life').toBe('easy');
+            throw new Error('Not implemented');
         });
     });
 
     describe('when concept is selected in filter view', () => {
         it('should display the concept', () => {
-            expect('life').toBe('easy');
+            throw new Error('Not implemented');
         });
     });
 

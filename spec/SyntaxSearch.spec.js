@@ -19,14 +19,14 @@ describe('SyntaxSearch', () => {
 
     describe('when concept result is selected', () => {
         it('should request concept info', () => {
-            expect('life').toBe('easy');
+            throw new Error('Not implemented');
         });
     });
 
     describe('when resource requested', () => {
         describe('concept search results', () => {
             it('should send results to the filter view', () => {
-                expect('life').toBe('easy');
+                throw new Error('Not implemented');
             });
         });
     });
@@ -74,11 +74,11 @@ describe('SyntaxSearch', () => {
 
         describe("when result view isn't provided", () => {
             it("shouldn't attempt to open search results view", () => {
-                expect('life').toBe('easy');
+                throw new Error('Not implemented');
             });
 
             it("shouldn't attempt to hide search results view", () => {
-                expect('life').toBe('easy');
+                throw new Error('Not implemented');
             });
         });
     });
