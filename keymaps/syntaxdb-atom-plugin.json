@@ -1,12 +1,20 @@
 {
-    ".platform-darwin, .platform-win32, .platform-linux": {
-        "ctrl-alt-s": "syntaxdb-atom-plugin:search",
+    ".platform-darwin": {
+        "cmd-alt-y": "syntaxdb-atom-plugin:search",
+        "cmd-alt-l": "syntaxdb-atom-plugin:language-filter"
+    },
+    ".platform-win32, .platform-linux": {
+        "ctrl-alt-s": "syntaxdb-atom-plugin:search"
+    },
+    ".platform-win32": {
         "ctrl-alt-l": "syntaxdb-atom-plugin:language-filter"
+    },
+    ".platform-linux": {
+        "ctrl-alt-f": "syntaxdb-atom-plugin:language-filter"
     },
     ".platform-darwin .syntaxdb-result-editor, .platform-win32 .syntaxdb-result-editor, .platform-linux .syntaxdb-result-editor": {
         "shift-enter": "syntaxdb-atom-plugin:place-example",
         "shift-tab": "syntaxdb-atom-plugin:next-tab",
-        "ctrl-shift-tab": "syntaxdb-atom-plugin:prev-tab",
-        "ctrl-shift-tab ^ctrl": "syntaxdb-atom-plugin:prev-tab"
+        "ctrl-shift-tab": "syntaxdb-atom-plugin:prev-tab"
     }
 }
