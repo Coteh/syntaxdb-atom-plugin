@@ -5,7 +5,6 @@
     "description": "An atom plugin for SyntaxDB.",
     "keywords": [],
     "scripts": {
-        "test-ci": "atom --test ./spec/*.spec.js",
         "test": "atom --test --timeout 60",
         "format": "prettier --config ./.prettierrc --write ."
     },
