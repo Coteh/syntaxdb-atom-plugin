@@ -1,0 +1,65 @@
+[
+    {
+        "id": 1,
+        "language_name": "Java",
+        "position": 1,
+        "language_version": "SE 8",
+        "language_permalink": "java"
+    },
+    {
+        "id": 2,
+        "language_name": "C",
+        "position": 2,
+        "language_version": "C11",
+        "language_permalink": "c"
+    },
+    {
+        "id": 3,
+        "language_name": "C++",
+        "position": 3,
+        "language_version": "C++14",
+        "language_permalink": "cpp"
+    },
+    {
+        "id": 4,
+        "language_name": "C#",
+        "position": 4,
+        "language_version": "5",
+        "language_permalink": "csharp"
+    },
+    {
+        "id": 7,
+        "language_name": "Python",
+        "position": 6,
+        "language_version": "3.4.3",
+        "language_permalink": "python"
+    },
+    {
+        "id": 8,
+        "language_name": "Ruby",
+        "position": 7,
+        "language_version": "2.2.0",
+        "language_permalink": "ruby"
+    },
+    {
+        "id": 10,
+        "language_name": "JavaScript",
+        "position": 8,
+        "language_version": "1.8.5",
+        "language_permalink": "javascript"
+    },
+    {
+        "id": 11,
+        "language_name": "Swift",
+        "position": 9,
+        "language_version": "4",
+        "language_permalink": "swift"
+    },
+    {
+        "id": 13,
+        "language_name": "Go",
+        "position": 10,
+        "language_version": "1.6",
+        "language_permalink": "go"
+    }
+]

@@ -1,7 +1,6 @@
 'use babel';
 
-// TODO mock request calls using proxyquire or something similar
-// https://github.com/thlorenz/proxyquire
+// TODO mock request calls using sinon if it's possible, or use nock if it's not possible to replace request fields at this level
 
 import SyntaxFilterView from '../lib/view/SyntaxFilterView';
 

@@ -5,9 +5,8 @@
     "description": "An atom plugin for SyntaxDB.",
     "keywords": [],
     "scripts": {
-        "atom-test-ci": "npm test ./spec/*.js",
-        "atom-test": "atom --test --timeout 60",
-        "test": "mocha --require @babel/register",
+        "test-ci": "atom --test ./spec/*.spec.js",
+        "test": "atom --test --timeout 60",
         "format": "prettier --config ./.prettierrc --write ."
     },
     "activationCommands": {
@@ -28,16 +27,10 @@
         "request": "^2.60.0"
     },
     "devDependencies": {
-        "@babel/cli": "^7.7.4",
-        "@babel/core": "^7.7.4",
-        "@babel/preset-env": "^7.7.4",
-        "@babel/register": "^7.7.4",
         "chai": "^4.2.0",
         "husky": "^4.2.5",
-        "mocha": "^8.1.3",
         "prettier": "^2.1.1",
         "pretty-quick": "^3.0.0",
-        "proxyquire": "^2.1.3",
         "sinon": "^9.0.3",
         "sinon-chai": "^3.5.0"
     },

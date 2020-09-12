@@ -1,30 +1,73 @@
 'use babel';
 
-const proxyquire = require('proxyquire');
+import request from 'request';
+import SyntaxFilterView from '../lib/view/SyntaxFilterView';
+import SyntaxResultView from '../lib/view/SyntaxResultView';
+import { LanguageFilterMode } from '../lib/domain/SyntaxModes';
 const sinon = require('sinon');
-const getStub = sinon.stub();
-const SyntaxAggregator = proxyquire('../lib/domain/SyntaxAggregator', {
-    request: {
-        get: getStub,
-    },
-}).default;
+const SyntaxAggregator = require('../lib/domain/SyntaxAggregator');
+const fs = require('fs');
+const chai = require('chai');
 const { expect } = require('chai');
+chai.use(require('sinon-chai'));
 
 describe('SyntaxAggregator', () => {
     let syntaxAggregator;
+    let filterView;
+    let resultView;
 
     beforeEach(() => {
         syntaxAggregator = new SyntaxAggregator();
+        filterView = sinon.createStubInstance(SyntaxFilterView);
+        resultView = sinon.createStubInstance(SyntaxResultView);
+        syntaxAggregator.setViews({
+            filterView: filterView,
+            resultView: resultView,
+        });
     });
 
     describe('when it goes from untoggled to toggled', () => {
-        it('should request languages', () => {
-            syntaxAggregator.setViews({ filterView: {}, resultView: {} });
+        let getStub;
+        const languagesJSONStr = fs.readFileSync(
+            './spec/items/languages.json',
+            'utf8',
+        );
+        const languagesJSON = JSON.parse(languagesJSONStr);
+
+        beforeEach(() => {
+            getStub = sinon.stub(request, 'get');
+        });
+        it('should send language items to filter view', () => {
+            expect(getStub).to.not.have.been.called;
+
             syntaxAggregator.toggle();
+            getStub.yield(null, null, languagesJSONStr);
+
             expect(getStub).to.have.been.calledOnce;
+            expect(filterView.setItems).to.have.been.calledWith(languagesJSON);
+        });
+        it('should be in language select mode', () => {
+            expect(syntaxAggregator.currentMode).to.equal(
+                LanguageFilterMode.NONE,
+            );
+
+            syntaxAggregator.toggle();
+            getStub.yield(null, null, languagesJSONStr);
+
+            expect(syntaxAggregator.currentMode).to.equal(
+                LanguageFilterMode.SELECT_LANGUAGE,
+            );
         });
         it('should show the filter view', () => {
-            throw new Error('Not implemented');
+            expect(filterView.showPanel).to.not.have.been.called;
+
+            syntaxAggregator.toggle();
+            getStub.yield(null, null, languagesJSONStr);
+
+            expect(filterView.showPanel).to.have.been.calledOnce;
+        });
+        afterEach(() => {
+            getStub.restore();
         });
     });
 
