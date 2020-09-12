@@ -1,79 +1,139 @@
 'use babel';
 
-import SyntaxAggregator from '../lib/domain/SyntaxAggregator';
+import request from 'request';
+import SyntaxFilterView from '../lib/view/SyntaxFilterView';
+import SyntaxResultView from '../lib/view/SyntaxResultView';
+import { LanguageFilterMode } from '../lib/domain/SyntaxModes';
+const sinon = require('sinon');
+const SyntaxAggregator = require('../lib/domain/SyntaxAggregator');
+const fs = require('fs');
+const chai = require('chai');
+const { expect } = require('chai');
+chai.use(require('sinon-chai'));
 
 describe('SyntaxAggregator', () => {
-    let syntaxAggregator, workspaceElement, activationPromise;
+    let syntaxAggregator;
+    let filterView;
+    let resultView;
 
     beforeEach(() => {
-        workspaceElement = atom.views.getView(atom.workspace);
-        activationPromise = atom.packages.activatePackage(
-            'syntaxdb-atom-plugin',
-        );
+        syntaxAggregator = new SyntaxAggregator();
+        filterView = sinon.createStubInstance(SyntaxFilterView);
+        resultView = sinon.createStubInstance(SyntaxResultView);
+        syntaxAggregator.setViews({
+            filterView: filterView,
+            resultView: resultView,
+        });
     });
 
-    describe('when aggregator is toggled', () => {
-        it('should display a syntaxdb filter view', () => {
-            // Attaching the workspaceElement to the DOM is required to allow the
-            // `toBeVisible()` matchers to work. Anything testing visibility or focus
-            // requires that the workspaceElement is on the DOM. Tests that attach the
-            // workspaceElement to the DOM are generally slower than those off DOM.
-            jasmine.attachToDOM(workspaceElement);
+    describe('when it goes from untoggled to toggled', () => {
+        let getStub;
+        const languagesJSONStr = fs.readFileSync(
+            './spec/items/languages.json',
+            'utf8',
+        );
+        const languagesJSON = JSON.parse(languagesJSONStr);
 
-            // Expect the SyntaxDB filter panel to not be there yet
-            expect(
-                workspaceElement.querySelector('.syntaxdb-filter'),
-            ).not.toExist();
+        beforeEach(() => {
+            getStub = sinon.stub(request, 'get');
+        });
+        it('should send language items to filter view', () => {
+            expect(getStub).to.not.have.been.called;
 
-            // Trigger the SyntaxDB language filter bar
-            atom.commands.dispatch(
-                workspaceElement,
-                'syntaxdb-atom-plugin:language-filter',
+            syntaxAggregator.toggle();
+            getStub.yield(null, null, languagesJSONStr);
+
+            expect(getStub).to.have.been.calledOnce;
+            expect(filterView.setItems).to.have.been.calledWith(languagesJSON);
+        });
+        it('should be in language select mode', () => {
+            expect(syntaxAggregator.currentMode).to.equal(
+                LanguageFilterMode.NONE,
             );
 
-            waitsFor(() => {
-                return activationPromise;
+            syntaxAggregator.toggle();
+            getStub.yield(null, null, languagesJSONStr);
+
+            expect(syntaxAggregator.currentMode).to.equal(
+                LanguageFilterMode.SELECT_LANGUAGE,
+            );
+        });
+        it('should show the filter view', () => {
+            expect(filterView.showPanel).to.not.have.been.called;
+
+            syntaxAggregator.toggle();
+            getStub.yield(null, null, languagesJSONStr);
+
+            expect(filterView.showPanel).to.have.been.calledOnce;
+        });
+        afterEach(() => {
+            getStub.restore();
+        });
+    });
+
+    describe('when it goes from toggled to untoggled', () => {
+        it('should hide the filter view', () => {
+            throw new Error('Not implemented');
+        });
+    });
+
+    describe('when shown', () => {
+        it('should show the view', () => {
+            throw new Error('Not implemented');
+        });
+    });
+
+    describe('when hidden', () => {
+        it('hides the view', () => {
+            throw new Error('Not implemented');
+        });
+    });
+
+    describe('when language item selected', () => {
+        it('should request categories', () => {
+            throw new Error('Not implemented');
+        });
+    });
+
+    describe('when category item selected', () => {
+        it('should request concepts', () => {
+            throw new Error('Not implemented');
+        });
+    });
+
+    describe('when concept item selected', () => {
+        it('should request concept', () => {
+            throw new Error('Not implemented');
+        });
+    });
+
+    describe('when resource requested', () => {
+        describe('list of languages', () => {
+            it('should send list of languages to the view', () => {
+                throw new Error('Not implemented');
             });
-
-            runs(() => {
-                var filterPanel = workspaceElement.querySelector(
-                    '.syntaxdb-filter',
-                );
-                expect(filterPanel).toBeVisible();
+        });
+        describe('list of category', () => {
+            it('should send list of categories to the view', () => {
+                throw new Error('Not implemented');
             });
         });
-
-        it('should display a list of languages that are covered by SyntaxDB', () => {
-            expect('life').toBe('easy');
+        describe('list of concepts', () => {
+            it('should send list of concepts to the view', () => {
+                throw new Error('Not implemented');
+            });
+        });
+        describe('concept', () => {
+            it('should send concept to view', () => {
+                throw new Error('Not implemented');
+            });
         });
     });
 
-    describe('when language result is selected', () => {
-        it('should display categories pretaining to that language', () => {
-            expect('life').toBe('easy');
-        });
-    });
-
-    describe('when category result is selected', () => {
-        it('should display concepts pretaining to that category', () => {
-            expect('life').toBe('easy');
-        });
-    });
-
-    describe('when concept result is selected', () => {
-        it('should display concept info in results view', () => {
-            expect('life').toBe('easy');
-        });
-    });
-
-    describe("when appropriate views aren't provided", () => {
-        beforeEach(() => {
-            syntaxAggregator = new SyntaxAggregator();
-        });
-
+    describe("when views aren't provided", () => {
         describe("when filter view isn't provided", () => {
             beforeEach(() => {
-                expect(syntaxAggregator.filterView).not.toExist();
+                expect(syntaxAggregator.filterView).not.exist;
             });
 
             it("shouldn't attempt to open filter view", () => {
@@ -91,11 +151,11 @@ describe('SyntaxAggregator', () => {
 
         describe("when result view isn't provided", () => {
             it("shouldn't attempt to open search results view", () => {
-                expect('life').toBe('easy');
+                throw new Error('Not implemented');
             });
 
             it("shouldn't attempt to hide search results view", () => {
-                expect('life').toBe('easy');
+                throw new Error('Not implemented');
             });
         });
     });

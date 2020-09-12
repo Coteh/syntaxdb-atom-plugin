@@ -5,7 +5,7 @@
     "description": "An atom plugin for SyntaxDB.",
     "keywords": [],
     "scripts": {
-        "test": "atom --test --timeout 60 ./spec/*.js",
+        "test": "atom --test --timeout 60",
         "format": "prettier --config ./.prettierrc --write ."
     },
     "activationCommands": {
@@ -26,9 +26,12 @@
         "request": "^2.60.0"
     },
     "devDependencies": {
+        "chai": "^4.2.0",
         "husky": "^4.3.0",
         "prettier": "^2.1.1",
-        "pretty-quick": "^3.0.2"
+        "pretty-quick": "^3.0.2",
+        "sinon": "^9.0.3",
+        "sinon-chai": "^3.5.0"
     },
     "husky": {
         "hooks": {

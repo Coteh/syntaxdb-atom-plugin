@@ -1,29 +1,102 @@
 'use babel';
 
+// TODO mock request calls using sinon if it's possible, or use nock if it's not possible to replace request fields at this level
+
 import SyntaxFilterView from '../lib/view/SyntaxFilterView';
 
 describe('SyntaxFilterView', () => {
-    describe('when item is selected on filter view', () => {
-        it('should emit the selection event', () => {
-            expect('life').toBe('easy');
+    let workspaceElement, activationPromise;
+
+    beforeEach(() => {
+        workspaceElement = atom.views.getView(atom.workspace);
+
+        // Attaching the workspaceElement to the DOM is required to allow the
+        // `toBeVisible()` matchers to work. Anything testing visibility or focus
+        // requires that the workspaceElement is on the DOM. Tests that attach the
+        // workspaceElement to the DOM are generally slower than those off DOM.
+        jasmine.attachToDOM(workspaceElement);
+
+        waitsForPromise(() => atom.workspace.open());
+
+        runs(() => {
+            // Atom packages with "activationCommands" in package.json are lazy loaded
+            activationPromise = atom.packages.activatePackage(
+                'syntaxdb-atom-plugin',
+            );
         });
     });
 
-    describe('when filter view is cancelled', () => {
-        it('should emit the cancellation event', () => {
-            expect('life').toBe('easy');
+    describe('when filter view is toggled', () => {
+        it('should display a syntaxdb filter view', () => {
+            // Expect the SyntaxDB filter panel to not be there yet
+            expect(
+                workspaceElement.querySelector('.syntaxdb-filter'),
+            ).not.toExist();
+            // Trigger the SyntaxDB language filter bar
+            atom.commands.dispatch(
+                workspaceElement,
+                'syntaxdb-atom-plugin:language-filter',
+            );
+            // Dispatch should now trigger the package. Wait for package to be loaded
+            waitsForPromise(() => activationPromise);
+
+            waits(2000);
+
+            runs(() => {
+                // Should now be visible
+                expect(
+                    workspaceElement.querySelector('.syntaxdb-filter'),
+                ).toBeVisible();
+            });
+        });
+
+        it('should display a list of languages that are covered by SyntaxDB', () => {
+            throw new Error('Not implemented');
         });
     });
 
-    describe('when filter view is populated with items', () => {
-        it('should ensure that the filter text editor view is in panel view', () => {
-            expect('life').toBe('easy');
+    describe('when language is selected in filter view', () => {
+        it('should display categories pertaining to that language', () => {
+            throw new Error('Not implemented');
         });
     });
 
-    describe('when filter view is populated with no items', () => {
-        it('should position the filter text editor view away from panel view', () => {
-            expect('life').toBe('easy');
+    describe('when category is selected in filter view', () => {
+        it('should display concepts pertaining to that category', () => {
+            throw new Error('Not implemented');
+        });
+    });
+
+    describe('when concept is selected in filter view', () => {
+        it('should display the concept', () => {
+            throw new Error('Not implemented');
+        });
+    });
+
+    describe('when filter view has no items', () => {
+        it('should not show the filter text editor view', () => {
+            // Trigger the SyntaxDB language filter bar
+            atom.commands.dispatch(
+                workspaceElement,
+                'syntaxdb-atom-plugin:language-filter',
+            );
+            // Dispatch should now trigger the package. Wait for package to be loaded
+            waitsForPromise(() => activationPromise);
+
+            waits(2000);
+
+            runs(() => {
+                // Should not be visible
+                expect(
+                    workspaceElement.querySelector(
+                        '.syntaxdb-filter > .editor',
+                    ),
+                ).not.toBeVisible();
+            });
+        });
+
+        it('should display a label stating that there are no items', () => {
+            throw new Error('Not implemented');
         });
     });
 });
