@@ -17,7 +17,7 @@ apm install syntaxdb-atom-plugin
 # How to Use
 
 To use the atom package, make sure it's installed, then press Ctrl-Alt-S (Cmd-Alt-Y on macOS) to activate the SyntaxDB search panel.
-To activate the language filter, which displays all concepts on the SyntaxDB database by language, press Ctrl-Alt-L (Cmd-Alt-L on macOS and Ctrl-Alt-F on Linux).
+To activate the language filter, which displays all concepts on the SyntaxDB database by language, press Ctrl-Alt-L (Cmd-Alt-L on macOS or Ctrl-Alt-F on Linux).
 
 ![Search View](https://raw.githubusercontent.com/Coteh/syntaxdb-atom-plugin/master/screenshots/SearchView.gif)  
 _SyntaxDB plugin search bar_
