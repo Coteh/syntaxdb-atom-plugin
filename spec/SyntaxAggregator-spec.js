@@ -72,20 +72,54 @@ describe('SyntaxAggregator', () => {
     });
 
     describe('when it goes from toggled to untoggled', () => {
+        let getStub;
+        const languagesJSONStr = fs.readFileSync(
+            './spec/items/languages.json',
+            'utf8',
+        );
+        const languagesJSON = JSON.parse(languagesJSONStr);
+
+        beforeEach(() => {
+            getStub = sinon.stub(request, 'get');
+
+            expect(filterView.showPanel).to.not.have.been.called;
+            expect(filterView.hidePanel).to.not.have.been.called;
+
+            syntaxAggregator.toggle();
+            getStub.yield(null, null, languagesJSONStr);
+
+            expect(filterView.showPanel).to.have.been.calledOnce;
+            expect(filterView.hidePanel).to.not.have.been.called;
+        });
         it('should hide the filter view', () => {
-            throw new Error('Not implemented');
+            filterView.isPanelVisible = sinon.stub().returns(true);
+            syntaxAggregator.toggle();
+
+            expect(filterView.showPanel).to.have.been.calledOnce;
+            expect(filterView.hidePanel).to.have.been.calledOnce;
+        });
+        afterEach(() => {
+            getStub.restore();
         });
     });
 
-    describe('when shown', () => {
-        it('should show the view', () => {
-            throw new Error('Not implemented');
+    describe('when show triggered', () => {
+        it('should show the filter view', () => {
+            expect(filterView.showPanel).to.not.have.been.called;
+
+            syntaxAggregator.show();
+
+            expect(filterView.showPanel).to.have.been.calledOnce;
         });
     });
 
     describe('when hidden', () => {
         it('hides the view', () => {
-            throw new Error('Not implemented');
+            expect(filterView.hidePanel).to.not.have.been.called;
+
+            syntaxAggregator.hide();
+
+            expect(filterView.hidePanel).to.have.been.calledOnce;
         });
     });
 
