@@ -124,8 +124,41 @@ describe('SyntaxAggregator', () => {
     });
 
     describe('when language item selected', () => {
+        let getStub;
+        const categoriesJSONStr = fs.readFileSync(
+            './spec/items/categories.json',
+            'utf8',
+        );
+        const categoriesJSON = JSON.parse(categoriesJSONStr);
+
+        beforeEach(() => {
+            getStub = sinon.stub(request, 'get');
+        });
         it('should request categories', () => {
-            throw new Error('Not implemented');
+            syntaxAggregator.onSelect({
+                item: {
+                    language_permalink: 'csharp',
+                },
+                mode: LanguageFilterMode.SELECT_LANGUAGE,
+            });
+            getStub.yield(null, null, categoriesJSONStr);
+
+            expect(getStub).to.have.been.calledOnce;
+            expect(filterView.setItems).to.have.been.calledWith(categoriesJSON);
+        });
+        it('should show the results in a new panel', () => {
+            syntaxAggregator.onSelect({
+                item: {
+                    language_permalink: 'csharp',
+                },
+                mode: LanguageFilterMode.SELECT_LANGUAGE,
+            });
+            getStub.yield(null, null, categoriesJSONStr);
+
+            expect(filterView.showPanel).to.have.been.calledOnce;
+        });
+        afterEach(() => {
+            getStub.restore();
         });
     });
 
