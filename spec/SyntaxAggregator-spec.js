@@ -274,18 +274,16 @@ describe('SyntaxAggregator', () => {
                 expect(syntaxAggregator.filterView).to.not.exist;
             });
 
-            it("shouldn't attempt to open filter view", () => {
-                expect(syntaxAggregator.show).to.throw(
+            it('should throw exception if show is triggered', () => {
+                expect(() => syntaxAggregator.show()).to.throw(
                     'No filter view provided',
                 );
-                expect(filterView.showPanel).to.not.have.been.called;
             });
 
-            it("shouldn't attempt to hide filter view", () => {
-                expect(syntaxAggregator.hide).to.throw(
+            it('should throw exception if hide is triggered', () => {
+                expect(() => syntaxAggregator.hide()).to.throw(
                     'No filter view provided',
                 );
-                expect(filterView.hidePanel).to.not.have.been.called;
             });
         });
 
@@ -315,7 +313,8 @@ describe('SyntaxAggregator', () => {
             };
 
             beforeEach(() => {
-                syntaxAggregator = new SyntaxAggregator(resultsPresenter);
+                // TODO move this to ResultsPresenter spec, since it tests whether presenter throws when showing nonexistent results panel
+                syntaxAggregator = new SyntaxAggregator(new ResultsPresenter());
                 filterView = sinon.createStubInstance(SyntaxFilterView);
                 syntaxAggregator.setViews({
                     filterView: filterView,
@@ -323,13 +322,13 @@ describe('SyntaxAggregator', () => {
                 expect(syntaxAggregator.resultView).to.not.exist;
             });
 
-            it("shouldn't attempt to show results", () => {
-                expect(resultView.showPanel).to.not.have.been.called;
-                syntaxAggregator.onSelect({
-                    item: concept,
-                    mode: LanguageFilterMode.SELECT_CONCEPT,
-                });
-                expect(resultView.showPanel).to.not.have.been.called;
+            it('should throw exception if attempting to present results', () => {
+                expect(() =>
+                    syntaxAggregator.onSelect({
+                        item: concept,
+                        mode: LanguageFilterMode.SELECT_CONCEPT,
+                    }),
+                ).to.throw('No result view provided');
             });
         });
     });
