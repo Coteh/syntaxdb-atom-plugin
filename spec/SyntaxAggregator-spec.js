@@ -24,8 +24,8 @@ describe('SyntaxAggregator', () => {
         filterView = sinon.createStubInstance(SyntaxFilterView);
         resultView = sinon.createStubInstance(SyntaxResultView);
         syntaxAggregator.setViews({
-            filterView: filterView,
-            resultView: resultView,
+            filterView,
+            resultView,
         });
     });
 
