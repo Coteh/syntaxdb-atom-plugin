@@ -116,7 +116,7 @@ describe('SyntaxAggregator', () => {
         });
     });
 
-    describe('when hidden', () => {
+    describe('when hide triggered', () => {
         it('hides the view', () => {
             expect(filterView.hidePanel).to.not.have.been.called;
 
