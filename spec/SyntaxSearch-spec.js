@@ -130,15 +130,6 @@ describe('SyntaxSearch', () => {
         });
     });
 
-    describe('when concept result is selected', () => {
-        it('should request concept info', () => {
-            throw new Error('Not implemented');
-        });
-        it('should show results for concept', () => {
-            throw new Error('Not implemented');
-        });
-    });
-
     describe("when views aren't provided", () => {
         beforeEach(() => {
             syntaxSearch = new SyntaxSearch();
@@ -149,13 +140,13 @@ describe('SyntaxSearch', () => {
                 expect(syntaxSearch.searchView).not.to.exist;
             });
 
-            it("shouldn't attempt to open the search view", () => {
+            it('should throw exception if show is triggered', () => {
                 expect(() => syntaxSearch.showSearch()).to.throw(
                     'No search view provided',
                 );
             });
 
-            it("shouldn't attempt to hide the search view", () => {
+            it('should throw exception if hide is triggered', () => {
                 expect(() => syntaxSearch.hideSearch()).to.throw(
                     'No search view provided',
                 );
@@ -167,26 +158,16 @@ describe('SyntaxSearch', () => {
                 expect(syntaxSearch.filterView).not.to.exist;
             });
 
-            it("shouldn't attempt to open search results view", () => {
+            it('should throw exception if showing search results is triggered', () => {
                 expect(() => syntaxSearch.showSearchResults()).to.throw(
                     'No filter view provided',
                 );
             });
 
-            it("shouldn't attempt to hide search results view", () => {
+            it('should throw exception if hiding search results is triggered', () => {
                 expect(() => syntaxSearch.hideSearchResults()).to.throw(
                     'No filter view provided',
                 );
-            });
-        });
-
-        describe("when result view isn't provided", () => {
-            it("shouldn't attempt to open search results view", () => {
-                throw new Error('Not implemented');
-            });
-
-            it("shouldn't attempt to hide search results view", () => {
-                throw new Error('Not implemented');
             });
         });
     });
