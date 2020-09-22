@@ -77,7 +77,7 @@ describe('SyntaxSearch', () => {
         });
     });
 
-    describe('when search triggered', () => {
+    describe('when search performed', () => {
         let getStub;
         const searchResultsJSONStr = fs.readFileSync(
             './spec/items/forloopsearchresults.json',
@@ -111,6 +111,19 @@ describe('SyntaxSearch', () => {
 
             expect(getStub).to.have.been.calledOnce;
             expect(filterView.showPanel).to.have.been.called;
+        });
+        it('should send search query text to filter view', () => {
+            expect(getStub).not.to.have.been.called;
+
+            syntaxSearch.performSearch({
+                searchText: 'for loop',
+            });
+            getStub.yield(null, null, searchResultsJSONStr);
+
+            expect(getStub).to.have.been.calledOnce;
+            expect(filterView.setLabelMessage).to.have.been.calledWith(
+                sinon.match('for loop'),
+            );
         });
         afterEach(() => {
             getStub.restore();
