@@ -1,33 +1,132 @@
 'use babel';
 
+import request from 'request';
+import ResultsPresenter from '../lib/domain/ResultsPresenter';
 import SyntaxSearch from '../lib/domain/SyntaxSearch';
+import SyntaxFilterView from '../lib/view/SyntaxFilterView';
+import SyntaxSearchView from '../lib/view/SyntaxSearchView';
+import SyntaxResultView from '../lib/view/SyntaxResultView';
+const fs = require('fs');
+const sinon = require('sinon');
+const chai = require('chai');
+const { expect } = require('chai');
+chai.use(require('sinon-chai'));
 
 describe('SyntaxSearch', () => {
     let syntaxSearch;
+    let resultsPresenter;
+    let filterView;
+    let searchView;
+    let resultView;
 
-    describe('when search is shown', () => {
-        it('should prompt search', () => {
-            throw new Error('Not implemented');
+    beforeEach(() => {
+        resultsPresenter = sinon.createStubInstance(ResultsPresenter);
+        syntaxSearch = new SyntaxSearch(resultsPresenter);
+        filterView = sinon.createStubInstance(SyntaxFilterView);
+        searchView = sinon.createStubInstance(SyntaxSearchView);
+        resultView = sinon.createStubInstance(SyntaxResultView);
+        syntaxSearch.setViews({
+            filterView,
+            searchView,
+            resultView,
         });
     });
 
-    describe('when search is hidden', () => {
-        it('should hide the search menu', () => {
-            throw new Error('Not implemented');
+    describe('when it goes from untoggled to toggled', () => {
+        it('should show the search view', () => {
+            expect(searchView.showPanel).to.not.have.been.called;
+
+            syntaxSearch.toggleSearch();
+
+            expect(searchView.showPanel).to.have.been.calledOnce;
         });
     });
 
-    describe('when concept result is selected', () => {
-        it('should request concept info', () => {
-            throw new Error('Not implemented');
+    describe('when it goes from toggled to untoggled', () => {
+        it('should hide the search view', () => {
+            expect(searchView.hidePanel).to.not.have.been.called;
+
+            syntaxSearch.toggleSearch();
+
+            expect(searchView.hidePanel).to.not.have.been.called;
+
+            searchView.isPanelVisible = sinon.stub().returns(true);
+            syntaxSearch.toggleSearch();
+
+            expect(searchView.hidePanel).to.have.been.calledOnce;
         });
     });
 
-    describe('when resource requested', () => {
-        describe('concept search results', () => {
-            it('should send results to the filter view', () => {
-                throw new Error('Not implemented');
+    describe('when show triggered', () => {
+        it('should show the search view', () => {
+            expect(searchView.showPanel).to.not.have.been.called;
+
+            syntaxSearch.showSearch();
+
+            expect(searchView.showPanel).to.have.been.calledOnce;
+        });
+    });
+
+    describe('when hide triggered', () => {
+        it('should hide the search view', () => {
+            expect(searchView.hidePanel).to.not.have.been.called;
+
+            syntaxSearch.hideSearch();
+
+            expect(searchView.hidePanel).to.have.been.calledOnce;
+        });
+    });
+
+    describe('when search performed', () => {
+        let getStub;
+        const searchResultsJSONStr = fs.readFileSync(
+            './spec/items/forloopsearchresults.json',
+            'utf8',
+        );
+        const searchResultsJSON = JSON.parse(searchResultsJSONStr);
+
+        beforeEach(() => {
+            getStub = sinon.stub(request, 'get');
+        });
+        it('should request concepts', () => {
+            expect(getStub).not.to.have.been.called;
+
+            syntaxSearch.performSearch({
+                searchText: 'for loop',
             });
+            getStub.yield(null, null, searchResultsJSONStr);
+
+            expect(getStub).to.have.been.calledOnce;
+            expect(filterView.setItems).to.have.been.calledWith(
+                searchResultsJSON,
+            );
+        });
+        it('should send search results to the filter view', () => {
+            expect(getStub).not.to.have.been.called;
+
+            syntaxSearch.performSearch({
+                searchText: 'for loop',
+            });
+            getStub.yield(null, null, searchResultsJSONStr);
+
+            expect(getStub).to.have.been.calledOnce;
+            expect(filterView.showPanel).to.have.been.called;
+        });
+        it('should send search query text to filter view', () => {
+            expect(getStub).not.to.have.been.called;
+
+            syntaxSearch.performSearch({
+                searchText: 'for loop',
+            });
+            getStub.yield(null, null, searchResultsJSONStr);
+
+            expect(getStub).to.have.been.calledOnce;
+            expect(filterView.setLabelMessage).to.have.been.calledWith(
+                sinon.match('for loop'),
+            );
+        });
+        afterEach(() => {
+            getStub.restore();
         });
     });
 
@@ -38,47 +137,37 @@ describe('SyntaxSearch', () => {
 
         describe("when search view isn't provided", () => {
             beforeEach(() => {
-                expect(syntaxSearch.searchView).not.toExist();
+                expect(syntaxSearch.searchView).not.to.exist;
             });
 
-            it("shouldn't attempt to open the search view", () => {
-                expect(syntaxSearch.showSearch).toThrow(
-                    new Error('No search view provided'),
+            it('should throw exception if show is triggered', () => {
+                expect(() => syntaxSearch.showSearch()).to.throw(
+                    'No search view provided',
                 );
             });
 
-            it("shouldn't attempt to hide the search view", () => {
-                expect(syntaxSearch.hideSearch).toThrow(
-                    new Error('No search view provided'),
+            it('should throw exception if hide is triggered', () => {
+                expect(() => syntaxSearch.hideSearch()).to.throw(
+                    'No search view provided',
                 );
             });
         });
 
         describe("when filter view isn't provided", () => {
             beforeEach(() => {
-                expect(syntaxSearch.filterView).not.toExist();
+                expect(syntaxSearch.filterView).not.to.exist;
             });
 
-            it("shouldn't attempt to open search results view", () => {
-                expect(syntaxSearch.showSearchResults).toThrow(
-                    new Error('No filter view provided'),
+            it('should throw exception if showing search results is triggered', () => {
+                expect(() => syntaxSearch.showSearchResults()).to.throw(
+                    'No filter view provided',
                 );
             });
 
-            it("shouldn't attempt to hide search results view", () => {
-                expect(syntaxSearch.hideSearchResults).toThrow(
-                    new Error('No filter view provided'),
+            it('should throw exception if hiding search results is triggered', () => {
+                expect(() => syntaxSearch.hideSearchResults()).to.throw(
+                    'No filter view provided',
                 );
-            });
-        });
-
-        describe("when result view isn't provided", () => {
-            it("shouldn't attempt to open search results view", () => {
-                throw new Error('Not implemented');
-            });
-
-            it("shouldn't attempt to hide search results view", () => {
-                throw new Error('Not implemented');
             });
         });
     });

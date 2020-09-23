@@ -1,0 +1,42 @@
+[
+    {
+        "id": 19,
+        "category_name": "User Program Communication",
+        "category_search": "I/O in C#",
+        "language_id": 4,
+        "position": 1,
+        "language_permalink": "csharp"
+    },
+    {
+        "id": 25,
+        "category_name": "Variables",
+        "category_search": "Data Types in C#",
+        "language_id": 4,
+        "position": 2,
+        "language_permalink": "csharp"
+    },
+    {
+        "id": 21,
+        "category_name": "Control Flow",
+        "category_search": "Control Flow in C#",
+        "language_id": 4,
+        "position": 3,
+        "language_permalink": "csharp"
+    },
+    {
+        "id": 24,
+        "category_name": "Object Oriented Programming",
+        "category_search": "OOP in C#",
+        "language_id": 4,
+        "position": 4,
+        "language_permalink": "csharp"
+    },
+    {
+        "id": 43,
+        "category_name": "Strings",
+        "category_search": "Strings in C#",
+        "language_id": 4,
+        "position": 5,
+        "language_permalink": "csharp"
+    }
+]
