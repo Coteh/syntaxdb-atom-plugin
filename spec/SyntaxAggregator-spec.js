@@ -93,12 +93,14 @@ describe('SyntaxAggregator', () => {
 
             expect(filterView.showPanel).to.have.been.calledOnce;
             expect(filterView.hidePanel).to.not.have.been.called;
+
+            filterView.showPanel.resetHistory();
         });
         it('should hide the filter view', () => {
             filterView.isPanelVisible = sinon.stub().returns(true);
             syntaxAggregator.toggle();
 
-            expect(filterView.showPanel).to.have.been.calledOnce;
+            expect(filterView.showPanel).to.not.have.been.called;
             expect(filterView.hidePanel).to.have.been.calledOnce;
         });
         afterEach(() => {
