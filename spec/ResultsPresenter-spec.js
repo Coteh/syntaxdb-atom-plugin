@@ -81,6 +81,14 @@ describe('ResultsPresenter', () => {
                 }),
             ).to.throw('No result view provided');
         });
+        it('should throw an error if no result was provided to presenter', () => {
+            let resultsView = sinon.createStubInstance(SyntaxResultView);
+            expect(() =>
+                resultsPresenter.showResults(undefined, resultsView),
+            ).to.throw('No result to present');
+
+            expect(resultsView.hidePanel).to.not.have.been.called;
+        });
     });
     describe('when it closes', () => {
         it('should hide the result view', () => {
@@ -94,7 +102,6 @@ describe('ResultsPresenter', () => {
             expect(resultsView.hidePanel).to.have.been.calledOnce;
         });
         it('should throw an error if result view was not provided', () => {
-            let resultsView = sinon.createStubInstance(SyntaxResultView);
             resultsPresenter.results = {
                 item: concept,
             };
