@@ -82,9 +82,11 @@ describe('ResultsPresenter', () => {
             ).to.throw('No result view provided');
         });
         it('should throw an error if no result was provided to presenter', () => {
-            let resultsView = sinon.createStubInstance(SyntaxResultView);
             expect(() =>
-                resultsPresenter.showResults(undefined, resultsView),
+                resultsPresenter.showResults(
+                    undefined,
+                    sinon.createStubInstance(SyntaxResultView),
+                ),
             ).to.throw('No result to present');
         });
         it('should not show panel if no result was provided to presenter', () => {
