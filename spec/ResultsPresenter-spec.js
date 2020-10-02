@@ -86,8 +86,13 @@ describe('ResultsPresenter', () => {
             expect(() =>
                 resultsPresenter.showResults(undefined, resultsView),
             ).to.throw('No result to present');
-
-            expect(resultsView.hidePanel).to.not.have.been.called;
+        });
+        it('should not show panel if no result was provided to presenter', () => {
+            let resultsView = sinon.createStubInstance(SyntaxResultView);
+            expect(() =>
+                resultsPresenter.showResults(undefined, resultsView),
+            ).to.throw();
+            expect(resultsView.showPanel).to.not.have.been.called;
         });
     });
     describe('when it closes', () => {
