@@ -61,7 +61,8 @@ Whenever you make a change to the package, reload Atom window to see the changes
 
 # Issues
 
--   Previous tab shortcut registers twice if not released immediately. [#2](https://github.com/Coteh/syntaxdb-atom-plugin/issues/2)
+-   Documentation links are not listed in an expected manner [#36](https://github.com/Coteh/syntaxdb-atom-plugin/issues/36)
+-   Concept titles do not show up upon first search [#43](https://github.com/Coteh/syntaxdb-atom-plugin/issues/43)
 -   [View more issues here](https://github.com/Coteh/syntaxdb-atom-plugin/issues)
 
 # Future Additions
