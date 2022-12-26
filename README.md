@@ -1,3 +1,5 @@
+# [Atom has been archived](https://github.blog/2022-06-08-sunsetting-atom/). No new updates will be made to this extension and it has been archived.
+
 # SyntaxDB Atom Plugin
 
 ![Front](https://raw.githubusercontent.com/Coteh/syntaxdb-atom-plugin/master/screenshots/front.png)
